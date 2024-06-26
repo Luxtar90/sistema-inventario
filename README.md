@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tienda en Línea
 
-## Getting Started
+Este es un proyecto de una tienda en línea creada con Next.js, Prisma y Tailwind CSS. Permite gestionar productos, clientes y pedidos de manera eficiente y con una interfaz moderna.
 
-First, run the development server:
+## Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Listar productos
+- Agregar nuevos productos
+- Listar clientes
+- Agregar nuevos clientes
+- Crear pedidos
+- Ver pedidos
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologías Utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Next.js](https://nextjs.org/)
+- [Prisma](https://www.prisma.io/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Requisitos Previos
 
-## Learn More
+- Node.js (>= 18.17.0)
+- npm o yarn
 
-To learn more about Next.js, take a look at the following resources:
+## Instalación
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clona el repositorio:
+    ```bash
+    git clone https://github.com/tu-usuario/tienda-en-linea.git
+    cd tienda-en-linea
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. Instala las dependencias:
+    ```bash
+    npm install
+    # o
+    yarn install
+    ```
 
-## Deploy on Vercel
+3. Configura Prisma:
+    ```bash
+    npx prisma migrate dev --name init
+    npx prisma generate
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Uso
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Inicia el servidor de desarrollo:
+    ```bash
+    npm run dev
+    # o
+    yarn dev
+    ```
+
+2. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
+
+## Estructura del Proyecto
+
+```plaintext
+tienda-en-linea/
+├── node_modules/
+├── pages/
+│   ├── api/
+│   │   ├── productos.js
+│   │   ├── clientes.js
+│   │   └── pedidos.js
+│   ├── index.tsx
+│   ├── productos.tsx
+│   ├── nuevo-producto.tsx
+│   ├── clientes.tsx
+│   ├── nuevo-cliente.tsx
+│   └── hacer-pedido.tsx
+├── prisma/
+│   ├── schema.prisma
+│   └── dev.db (este archivo se generará después de la migración)
+├── public/
+├── styles/
+│   └── globals.css
+├── .gitignore
+├── next.config.js
+├── package.json
+└── README.md
