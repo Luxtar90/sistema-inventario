@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Register() {
   const [nombre, setNombre] = useState('');
@@ -9,19 +11,26 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ nombre, email, password }),
-    });
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nombre, email, password }),
+      });
 
-    if (res.ok) {
-      router.push('/auth/login');
-    } else {
-      const data = await res.json();
-      alert(data.message);
+      if (res.ok) {
+        toast.success('Registro exitoso! Redirigiendo a login...');
+        setTimeout(() => {
+          router.push('/auth/login');
+        }, 2000);
+      } else {
+        const data = await res.json();
+        toast.error(data.message || 'Error al registrar');
+      }
+    } catch (error) {
+      toast.error('Error de conexión. Por favor, intente nuevamente.');
     }
   };
 
@@ -61,6 +70,7 @@ export default function Register() {
         </div>
         <button type="submit" className="bg-blue-500 text-white p-2 rounded">Registrar</button>
       </form>
+      <ToastContainer />
     </div>
   );
 }

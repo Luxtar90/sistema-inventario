@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
   const router = useRouter();
@@ -10,10 +12,21 @@ export default function Home() {
     const token = localStorage.getItem('token');
     if (!token) {
       setIsAuthenticated(false);
+      toast.error('No estás autenticado. Por favor, inicia sesión o regístrate.');
     } else {
       setIsAuthenticated(true);
+      toast.success('Bienvenido de nuevo a la Tienda en Línea!');
     }
   }, [router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    toast.info('Has cerrado sesión');
+    setIsAuthenticated(false);
+    setTimeout(() => {
+      router.push('/auth/login');
+    }, 2000);
+  };
 
   if (!isAuthenticated) {
     return (
@@ -28,6 +41,7 @@ export default function Home() {
             <button className="bg-gray-500 text-white p-2 rounded">Iniciar Sesión</button>
           </Link>
         </div>
+        <ToastContainer />
       </div>
     );
   }
@@ -69,6 +83,8 @@ export default function Home() {
           </li>
         </ul>
       </nav>
+      <button onClick={handleLogout} className="mt-8 bg-red-500 text-white p-2 rounded">Cerrar Sesión</button>
+      <ToastContainer />
     </div>
   );
 }
