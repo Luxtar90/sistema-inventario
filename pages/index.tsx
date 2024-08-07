@@ -1,6 +1,37 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 export default function Home() {
+  const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setIsAuthenticated(false);
+    } else {
+      setIsAuthenticated(true);
+    }
+  }, [router]);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-8">
+        <h1 className="text-4xl font-bold mb-8">Bienvenido a la Tienda en Línea</h1>
+        <p className="mb-4">Debes estar registrado y autenticado para acceder al contenido.</p>
+        <div className="flex space-x-4">
+          <Link href="/auth/register">
+            <button className="bg-blue-500 text-white p-2 rounded">Registrarse</button>
+          </Link>
+          <Link href="/auth/login">
+            <button className="bg-gray-500 text-white p-2 rounded">Iniciar Sesión</button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-8">
       <h1 className="text-4xl font-bold mb-8">Tienda en Línea</h1>
