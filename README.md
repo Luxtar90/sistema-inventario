@@ -1,34 +1,32 @@
-# Tienda en Línea
+readme_content = """
+# Sistema de Gestión de Inventario
 
-Este es un proyecto de una tienda en línea creada con Next.js, Prisma y Tailwind CSS. Permite gestionar productos, clientes y pedidos de manera eficiente y con una interfaz moderna.
+Este es un sistema web integral diseñado para gestionar inventarios de productos, incluyendo funcionalidades de registro y login de usuarios, un dashboard personalizado, y notificaciones de stock bajo. El sistema fue desarrollado siguiendo el estándar ISO 12207.
 
 ## Características
 
-- Listar productos
-- Agregar nuevos productos
-- Listar clientes
-- Agregar nuevos clientes
-- Crear pedidos
-- Ver pedidos
-
-## Tecnologías Utilizadas
-
-- [Next.js](https://nextjs.org/)
-- [Prisma](https://www.prisma.io/)
-- [Tailwind CSS](https://tailwindcss.com/)
+- **Registro y Login de Usuarios:** Permite a los usuarios registrarse y autenticarse en el sistema.
+- **Dashboard Personalizado:** Visualiza un resumen del inventario con opciones para gestionar productos, clientes y proveedores.
+- **Gestión de Productos:** Añade, edita y elimina productos del inventario.
+- **Gestión de Clientes:** Añade y gestiona la información de los clientes.
+- **Gestión de Proveedores:** Añade y gestiona la información de los proveedores.
+- **Generación de Reportes:** Genera reportes de stock de productos.
+- **Notificaciones de Stock Bajo:** Notifica cuando un producto tiene un stock menor o igual a 5 unidades.
+- **Sistema de Notificaciones:** Muestra y gestiona las notificaciones dentro de la aplicación.
 
 ## Requisitos Previos
 
 - Node.js (>= 18.17.0)
 - npm o yarn
+- Prisma
 
 ## Instalación
 
 1. Clona el repositorio:
-    ```bash
-    git clone https://github.com/tu-usuario/tienda-en-linea.git
-    cd tienda-en-linea
-    ```
+
+   ```bash
+   git clone https://github.com/tu-usuario/sistema-inventario.git
+   cd sistema-inventario
 
 2. Instala las dependencias:
     ```bash
@@ -57,19 +55,27 @@ Este es un proyecto de una tienda en línea creada con Next.js, Prisma y Tailwin
 ## Estructura del Proyecto
 
 ```plaintext
-tienda-en-linea/
+sistema-inventario/
 ├── node_modules/
 ├── pages/
 │   ├── api/
+│   │   ├── auth/
+│   │   │   ├── login.js
+│   │   │   ├── register.js
 │   │   ├── productos.js
 │   │   ├── clientes.js
-│   │   └── pedidos.js
+│   │   ├── pedidos.js
+│   │   ├── proveedores.js
+│   │   └── notificaciones.js
 │   ├── index.tsx
+│   ├── dashboard.tsx
 │   ├── productos.tsx
 │   ├── nuevo-producto.tsx
 │   ├── clientes.tsx
 │   ├── nuevo-cliente.tsx
-│   └── hacer-pedido.tsx
+│   ├── hacer-pedido.tsx
+│   ├── proveedores.tsx
+│   └── notificaciones.tsx
 ├── prisma/
 │   ├── schema.prisma
 │   └── dev.db (este archivo se generará después de la migración)

@@ -14,19 +14,22 @@ generator client {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  nombre   String
-  email    String   @unique
-  password String
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  email     String   @unique
+  password  String
   createdAt DateTime @default(now())
 }
 
 model Producto {
-  id      Int       @id @default(autoincrement())
-  nombre  String
-  precio  Float
-  stock   Int
-  pedidos Pedido[]
+  id                Int                      @id @default(autoincrement())
+  nombre            String
+  precio            Float
+  stock             Int
+  pedidos           Pedido[]                 @relation("ProductoPedidos")
+  proveedorId       Int?
+  proveedor         Proveedor?               @relation("ProveedorProductos", fields: [proveedorId], references: [id])
+  notificaciones    StockBajoNotificacion[]  @relation("ProductoNotificaciones")
 }
 
 model Cliente {
@@ -41,5 +44,24 @@ model Pedido {
   cliente_id  Int
   fecha_pedido DateTime  @default(now())
   Cliente     Cliente    @relation(fields: [cliente_id], references: [id])
-  productos   Producto[]
+  productos   Producto[] @relation("ProductoPedidos")
 }
+
+model Proveedor {
+  id        Int        @id @default(autoincrement())
+  nombre    String
+  contacto  String?
+  telefono  String?
+  direccion String?
+  productos Producto[] @relation("ProveedorProductos")
+}
+
+model StockBajoNotificacion {
+  id          Int      @id @default(autoincrement())
+  producto    Producto @relation("ProductoNotificaciones", fields: [productoId], references: [id])
+  productoId  Int
+  creadoEn    DateTime @default(now())
+  status      String   @default("Pendiente")
+}
+
+
