@@ -25,7 +25,7 @@ Este es un sistema web integral diseñado para gestionar inventarios de producto
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/tu-usuario/sistema-inventario.git
+   git clone https://github.com/Luxtar90/sistema-inventario.git
    cd sistema-inventario
 
 2. Instala las dependencias:
